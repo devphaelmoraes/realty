@@ -32,12 +32,41 @@ describe('Realty', () => {
     ).toThrowError(expected_error);
   });
 
-  it('should return a Realty', () => {
-    const validTitle = 'simple title';
+  it('should throw an error when description length is more than 500 characters', () => {
+    const expected_error =
+      'description must be less than or equal to 500 characters';
+    const longDescription =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec elit et arcu malesuada porttitor vitae eleifend augue. Proin efficitur elit nunc, fermentum gravida elit eleifend ut. Donec bibendum maximus risus, quis aliquet nisl fermentum at. Nulla volutpat venenatis orci non venenatis. Sed at ligula vel dui faucibus auctor ac in nulla. Nam ut augue quis urna sodales vulputate. Maecenas efficitur, neque nec pulvinar volutpat, erat turpis blandit tellus, at malesuada diam felis eu tortor..';
+    expect(() =>
+      Realty.create({
+        title: 'some title',
+        description: longDescription,
+      }),
+    ).toThrowError(expected_error);
+  });
+
+  it('should return description null when description is null', () => {
+    const nullDescription = null;
     const realty = Realty.create({
-      title: validTitle,
+      title: 'some title',
+      description: nullDescription,
     });
-    expect(realty.title).toBe(validTitle);
+    expect(realty.description).toBe(null);
+  });
+
+  it('should return a Realty', () => {
+    const expected_value = {
+      title: 'some title',
+      description: 'some description',
+    };
+
+    const realty = Realty.create({
+      title: expected_value.title,
+      description: expected_value.description,
+    });
+
     expect(realty).toBeInstanceOf(Realty);
+    expect(realty.title).toEqual(expected_value.title);
+    expect(realty.description).toEqual(expected_value.description);
   });
 });
