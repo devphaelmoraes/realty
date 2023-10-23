@@ -54,19 +54,51 @@ describe('Realty', () => {
     expect(realty.description).toBe(null);
   });
 
+  it('should throw an error when price is less than 0', () => {
+    const invalidPrice = -100;
+    expect(() =>
+      Realty.create({
+        title: 'some title',
+        price: invalidPrice,
+      }),
+    ).toThrowError('price must be greater than 0');
+  });
+
+  it('should throw an error when price is 0', () => {
+    const invalidPrice = 0;
+    expect(() =>
+      Realty.create({
+        title: 'some title',
+        price: invalidPrice,
+      }),
+    ).toThrowError('price must be greater than 0');
+  });
+
+  it('should return price null when price is null', () => {
+    const nullPrice = null;
+    const realty = Realty.create({
+      title: 'some title',
+      price: nullPrice,
+    });
+    expect(realty.price).toBe(null);
+  });
+
   it('should return a Realty', () => {
     const expected_value = {
       title: 'some title',
       description: 'some description',
+      price: 150000,
     };
 
     const realty = Realty.create({
       title: expected_value.title,
       description: expected_value.description,
+      price: expected_value.price,
     });
 
     expect(realty).toBeInstanceOf(Realty);
     expect(realty.title).toEqual(expected_value.title);
     expect(realty.description).toEqual(expected_value.description);
+    expect(realty.price).toEqual(expected_value.price);
   });
 });
