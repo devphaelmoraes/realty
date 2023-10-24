@@ -44,11 +44,12 @@ export class Realty {
   }
 
   private set price(value: number) {
-    if (value != null && value <= 0) {
-      throw new Error('price must be greater than 0');
+    if (value != null && (value <= 0 || isNaN(value))) {
+      throw new Error('price must be a positive number');
     }
     this._price = value;
   }
+
   get price(): number {
     return this._price;
   }

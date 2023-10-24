@@ -1,92 +1,145 @@
 import { Realty } from './realty';
 
 describe('Realty', () => {
-  it('should throw an error when title length is less than 3 characters', () => {
-    const expected_error = 'title must contain between 3 and 300 characters';
-    const shortTitle = 'ab';
-    expect(
-      () =>
-        new Realty({
-          title: shortTitle,
-        }),
-    ).toThrowError(expected_error);
-  });
-
-  it('should throw an error when title length is more than 300 characters', () => {
-    const expected_error = 'title must contain between 3 and 300 characters';
-    const longTitle =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec elit et arcu malesuada porttitor vitae eleifend augue. Proin efficitur elit nunc, fermentum gravida elit eleifend ut. Donec bibendum maximus risus, quis aliquet nisl fermentum at. Nulla volutpat venenatis orci non venenatis. Sed at ligula vel dui faucibus auctor ac in nulla. Nam ut augue quis urna sodales vulputate. Maecenas efficitur, neque nec pulvinar volutpat, erat turpis blandit tellus, at malesuada diam felis eu tortor..';
-    expect(
-      () =>
-        new Realty({
-          title: longTitle,
-        }),
-    ).toThrowError(expected_error);
-  });
-
-  it('should throw an error when title is null', () => {
-    const expected_error = 'title is required';
-    const nullTitle = null;
-    expect(
-      () =>
-        new Realty({
-          title: nullTitle,
-        }),
-    ).toThrowError(expected_error);
-  });
-
-  it('should throw an error when description length is more than 500 characters', () => {
-    const expected_error =
-      'description must be less than or equal to 500 characters';
-    const longDescription =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec elit et arcu malesuada porttitor vitae eleifend augue. Proin efficitur elit nunc, fermentum gravida elit eleifend ut. Donec bibendum maximus risus, quis aliquet nisl fermentum at. Nulla volutpat venenatis orci non venenatis. Sed at ligula vel dui faucibus auctor ac in nulla. Nam ut augue quis urna sodales vulputate. Maecenas efficitur, neque nec pulvinar volutpat, erat turpis blandit tellus, at malesuada diam felis eu tortor..';
-    expect(
-      () =>
-        new Realty({
-          title: 'some title',
-          description: longDescription,
-        }),
-    ).toThrowError(expected_error);
-  });
-
-  it('should return description null when description is null', () => {
-    const nullDescription = null;
-    const realty = new Realty({
-      title: 'some title',
-      description: nullDescription,
+  describe('setTitle', () => {
+    describe('when valid title', () => {
+      it('should set title when title is valid', () => {
+        const title = 'valid title';
+        const realty = new Realty({ title });
+        expect(realty.title).toBe(title);
+      });
     });
-    expect(realty.description).toBe(null);
-  });
+    describe('when invalid title', () => {
+      const EXPECTED_ERROR = 'title must contain between 3 and 300 characters';
 
-  it('should throw an error when price is less than 0', () => {
-    const invalidPrice = -100;
-    expect(
-      () =>
-        new Realty({
-          title: 'some title',
-          price: invalidPrice,
-        }),
-    ).toThrowError('price must be greater than 0');
-  });
+      it('should throw error when title is null', () => {
+        const nullTitle = null;
+        expect(
+          () =>
+            new Realty({
+              title: nullTitle,
+            }),
+        ).toThrowError('title is required');
+      });
 
-  it('should throw an error when price is 0', () => {
-    const invalidPrice = 0;
-    expect(
-      () =>
-        new Realty({
-          title: 'some title',
-          price: invalidPrice,
-        }),
-    ).toThrowError('price must be greater than 0');
-  });
+      it('should throw error when title length is less than 3 characters', () => {
+        const shortTitle = 'ab';
+        expect(
+          () =>
+            new Realty({
+              title: shortTitle,
+            }),
+        ).toThrowError(EXPECTED_ERROR);
+      });
 
-  it('should return price null when price is null', () => {
-    const nullPrice = null;
-    const realty = new Realty({
-      title: 'some title',
-      price: nullPrice,
+      it('should throw error when title length is more than 300 characters', () => {
+        const longTitle =
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec elit et arcu malesuada porttitor vitae eleifend augue. Proin efficitur elit nunc, fermentum gravida elit eleifend ut. Donec bibendum maximus risus, quis aliquet nisl fermentum at. Nulla volutpat venenatis orci non venenatis. Sed at ligula vel dui faucibus auctor ac in nulla. Nam ut augue quis urna sodales vulputate. Maecenas efficitur, neque nec pulvinar volutpat, erat turpis blandit tellus, at malesuada diam felis eu tortor..';
+        expect(
+          () =>
+            new Realty({
+              title: longTitle,
+            }),
+        ).toThrowError(EXPECTED_ERROR);
+      });
     });
-    expect(realty.price).toBe(null);
+  });
+
+  describe('setDescription', () => {
+    describe('when valid description', () => {
+      it('should set description when description is valid', () => {
+        const validDescription = 'some description';
+        const realty = new Realty({
+          title: 'some title',
+          description: validDescription,
+        });
+        expect(realty.description).toBe(validDescription);
+      });
+    });
+    describe('when null description', () => {
+      it('should set description null when description is null', () => {
+        const nullDescription = null;
+        const realty = new Realty({
+          title: 'some title',
+          description: nullDescription,
+        });
+        expect(realty.description).toBe(null);
+      });
+    });
+    describe('when invalid description', () => {
+      const EXPECTED_ERROR =
+        'description must be less than or equal to 500 characters';
+      it('should throw error when description length is more than 500 characters', () => {
+        const longDescription =
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec elit et arcu malesuada porttitor vitae eleifend augue. Proin efficitur elit nunc, fermentum gravida elit eleifend ut. Donec bibendum maximus risus, quis aliquet nisl fermentum at. Nulla volutpat venenatis orci non venenatis. Sed at ligula vel dui faucibus auctor ac in nulla. Nam ut augue quis urna sodales vulputate. Maecenas efficitur, neque nec pulvinar volutpat, erat turpis blandit tellus, at malesuada diam felis eu tortor..';
+        expect(
+          () =>
+            new Realty({
+              title: 'some title',
+              description: longDescription,
+            }),
+        ).toThrowError(EXPECTED_ERROR);
+      });
+    });
+  });
+  describe('setPrice', () => {
+    describe('when valid price', () => {
+      it('should set price when price is valid', () => {
+        const validPrice = 150000;
+        const realty = new Realty({
+          title: 'some title',
+          price: validPrice,
+        });
+        expect(realty.price).toBe(validPrice);
+      });
+    });
+
+    describe('when null price', () => {
+      it('should set price null when price is null', () => {
+        const nullPrice = null;
+        const realty = new Realty({
+          title: 'some title',
+          price: nullPrice,
+        });
+        expect(realty.price).toBe(nullPrice);
+      });
+    });
+
+    describe('when invalid price', () => {
+      const EXPECTED_ERROR = 'price must be a positive number';
+      it('should throw error when price is less than 0', () => {
+        const invalidPrice = -100;
+        expect(
+          () =>
+            new Realty({
+              title: 'some title',
+              price: invalidPrice,
+            }),
+        ).toThrowError(EXPECTED_ERROR);
+      });
+
+      it('should throw error when price is 0', () => {
+        const invalidPrice = 0;
+        expect(
+          () =>
+            new Realty({
+              title: 'some title',
+              price: invalidPrice,
+            }),
+        ).toThrowError(EXPECTED_ERROR);
+      });
+
+      it('should throw error when price is not a number', () => {
+        const invalidPrice = 'string' as any;
+        expect(
+          () =>
+            new Realty({
+              title: 'some title',
+              price: invalidPrice,
+            }),
+        ).toThrowError(EXPECTED_ERROR);
+      });
+    });
   });
 
   it('should return a Realty', () => {
