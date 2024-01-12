@@ -1,11 +1,12 @@
 import { RealtyEntityErrorCodes } from './realty-error-codes';
+import { RealtyType } from './realty-type';
 import { RealtyException } from './realty.exception';
 
 interface RealtyProps {
   title: string;
   description?: string;
   price?: number;
-  type?: string;
+  type: RealtyType;
 }
 
 export class Realty {
@@ -13,7 +14,7 @@ export class Realty {
   private _title: string;
   private _description: string;
   private _price: number;
-  private _type: string;
+  private _type: RealtyType;
 
   constructor(props: RealtyProps) {
     this.title = props.title;

@@ -1,12 +1,13 @@
 import { Realty } from './realty';
 import { RealtyEntityErrorCodes } from './realty-error-codes';
+import { RealtyType } from './realty-type';
 
 describe('Realty', () => {
   describe('setTitle', () => {
     describe('when valid title', () => {
       it('should set title when title is valid', () => {
         const title = 'valid title';
-        const realty = new Realty({ title, type: 'APARTMENT' });
+        const realty = new Realty({ title, type: RealtyType.APARTMENT });
         expect(realty.title).toBe(title);
       });
     });
@@ -19,7 +20,7 @@ describe('Realty', () => {
           () =>
             new Realty({
               title: nullTitle,
-              type: 'APARTMENT',
+              type: RealtyType.APARTMENT,
             }),
         ).toThrowError('title is required');
       });
@@ -30,7 +31,7 @@ describe('Realty', () => {
           () =>
             new Realty({
               title: shortTitle,
-              type: 'APARTMENT',
+              type: RealtyType.APARTMENT,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -42,6 +43,7 @@ describe('Realty', () => {
           () =>
             new Realty({
               title: longTitle,
+              type: RealtyType.APARTMENT,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -55,7 +57,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           description: validDescription,
-          type: 'APARTMENT',
+          type: RealtyType.APARTMENT,
         });
         expect(realty.description).toBe(validDescription);
       });
@@ -66,7 +68,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           description: nullDescription,
-          type: 'APARTMENT',
+          type: RealtyType.APARTMENT,
         });
         expect(realty.description).toBe(null);
       });
@@ -82,6 +84,7 @@ describe('Realty', () => {
             new Realty({
               title: 'some title',
               description: longDescription,
+              type: RealtyType.APARTMENT,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -95,7 +98,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           price: validPrice,
-          type: 'APARTMENT',
+          type: RealtyType.APARTMENT,
         });
         expect(realty.price).toBe(validPrice);
       });
@@ -107,7 +110,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           price: nullPrice,
-          type: 'APARTMENT',
+          type: RealtyType.APARTMENT,
         });
         expect(realty.price).toBe(nullPrice);
       });
@@ -122,6 +125,7 @@ describe('Realty', () => {
             new Realty({
               title: 'some title',
               price: invalidPrice,
+              type: RealtyType.APARTMENT,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -133,6 +137,7 @@ describe('Realty', () => {
             new Realty({
               title: 'some title',
               price: invalidPrice,
+              type: RealtyType.APARTMENT,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -144,6 +149,7 @@ describe('Realty', () => {
             new Realty({
               title: 'some title',
               price: invalidPrice,
+              type: RealtyType.APARTMENT,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -153,23 +159,21 @@ describe('Realty', () => {
   describe('when valid type', () => {
     describe('when type is APARTMENT', () => {
       it('returns type', () => {
-        const validType = 'APARTMENT';
         const realty = new Realty({
           title: 'some title',
-          type: validType,
+          type: RealtyType.APARTMENT,
         });
-        expect(realty.type).toBe(validType);
+        expect(realty.type).toBe(RealtyType.APARTMENT);
       });
     });
 
     describe('when type is HOUSE', () => {
       it('returns type', () => {
-        const validType = 'HOUSE';
         const realty = new Realty({
           title: 'some title',
-          type: validType,
+          type: RealtyType.HOUSE,
         });
-        expect(realty.type).toBe(validType);
+        expect(realty.type).toBe(RealtyType.HOUSE);
       });
     });
   });
@@ -200,7 +204,7 @@ describe('Realty', () => {
       title: expected_value.title,
       description: expected_value.description,
       price: expected_value.price,
-      type: 'APARTMENT',
+      type: RealtyType.APARTMENT,
     });
 
     expect(realty).toBeInstanceOf(Realty);
