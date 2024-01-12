@@ -5,7 +5,7 @@ describe('Realty', () => {
     describe('when valid title', () => {
       it('should set title when title is valid', () => {
         const title = 'valid title';
-        const realty = new Realty({ title });
+        const realty = new Realty({ title, type: 'APARTMENT' });
         expect(realty.title).toBe(title);
       });
     });
@@ -18,6 +18,7 @@ describe('Realty', () => {
           () =>
             new Realty({
               title: nullTitle,
+              type: 'APARTMENT',
             }),
         ).toThrowError('title is required');
       });
@@ -28,6 +29,7 @@ describe('Realty', () => {
           () =>
             new Realty({
               title: shortTitle,
+              type: 'APARTMENT',
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -52,6 +54,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           description: validDescription,
+          type: 'APARTMENT',
         });
         expect(realty.description).toBe(validDescription);
       });
@@ -62,6 +65,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           description: nullDescription,
+          type: 'APARTMENT',
         });
         expect(realty.description).toBe(null);
       });
@@ -82,6 +86,7 @@ describe('Realty', () => {
       });
     });
   });
+
   describe('setPrice', () => {
     describe('when valid price', () => {
       it('should set price when price is valid', () => {
@@ -89,6 +94,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           price: validPrice,
+          type: 'APARTMENT',
         });
         expect(realty.price).toBe(validPrice);
       });
@@ -100,6 +106,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           price: nullPrice,
+          type: 'APARTMENT',
         });
         expect(realty.price).toBe(nullPrice);
       });
@@ -155,22 +162,39 @@ describe('Realty', () => {
     });
   });
 
+  describe('when invalid type', () => {
+    describe('when type is null', () => {
+      it("should throw error 'type_is_required'", () => {
+        expect(
+          () =>
+            new Realty({
+              title: 'some title',
+              type: null,
+            }),
+        ).toThrowError('type_is_required');
+      });
+    });
+  });
+
   it('should return a Realty', () => {
     const expected_value = {
       title: 'some title',
       description: 'some description',
       price: 150000,
+      type: 'APARTMENT',
     };
 
     const realty = new Realty({
       title: expected_value.title,
       description: expected_value.description,
       price: expected_value.price,
+      type: 'APARTMENT',
     });
 
     expect(realty).toBeInstanceOf(Realty);
     expect(realty.title).toEqual(expected_value.title);
     expect(realty.description).toEqual(expected_value.description);
     expect(realty.price).toEqual(expected_value.price);
+    expect(realty.type).toEqual(expected_value.type);
   });
 });

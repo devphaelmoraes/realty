@@ -15,6 +15,7 @@ export class Realty {
     this.title = props.title;
     this.description = props.description;
     this.price = props.price;
+    this.type = props.type;
   }
 
   private set title(value: string) {
@@ -53,6 +54,12 @@ export class Realty {
 
   get price(): number {
     return this._price;
+  }
+
+  set type(value) {
+    if (!value) {
+      throw new Error('type_is_required');
+    }
   }
 
   get type() {
