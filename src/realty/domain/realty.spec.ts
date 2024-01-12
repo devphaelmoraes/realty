@@ -124,7 +124,7 @@ describe('Realty', () => {
                 price: null,
                 type: RealtyType.APARTMENT,
               }),
-          ).toThrowError('price_is_required');
+          ).toThrowError(RealtyEntityErrorCodes.PRICE_IS_REQUIRED);
         });
       });
       it('should throw error when price is less than 0', () => {
