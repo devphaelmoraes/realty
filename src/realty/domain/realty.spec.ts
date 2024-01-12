@@ -7,7 +7,11 @@ describe('Realty', () => {
     describe('when valid title', () => {
       it('should set title when title is valid', () => {
         const title = 'valid title';
-        const realty = new Realty({ title, type: RealtyType.APARTMENT });
+        const realty = new Realty({
+          title,
+          type: RealtyType.APARTMENT,
+          price: 1000,
+        });
         expect(realty.title).toBe(title);
       });
     });
@@ -21,6 +25,7 @@ describe('Realty', () => {
             new Realty({
               title: nullTitle,
               type: RealtyType.APARTMENT,
+              price: 1000,
             }),
         ).toThrowError('title is required');
       });
@@ -32,6 +37,7 @@ describe('Realty', () => {
             new Realty({
               title: shortTitle,
               type: RealtyType.APARTMENT,
+              price: 1000,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -44,6 +50,7 @@ describe('Realty', () => {
             new Realty({
               title: longTitle,
               type: RealtyType.APARTMENT,
+              price: 1000,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -58,6 +65,7 @@ describe('Realty', () => {
           title: 'some title',
           description: validDescription,
           type: RealtyType.APARTMENT,
+          price: 1000,
         });
         expect(realty.description).toBe(validDescription);
       });
@@ -69,6 +77,7 @@ describe('Realty', () => {
           title: 'some title',
           description: nullDescription,
           type: RealtyType.APARTMENT,
+          price: 1000,
         });
         expect(realty.description).toBe(null);
       });
@@ -85,6 +94,7 @@ describe('Realty', () => {
               title: 'some title',
               description: longDescription,
               type: RealtyType.APARTMENT,
+              price: 1000,
             }),
         ).toThrowError(EXPECTED_ERROR);
       });
@@ -93,7 +103,7 @@ describe('Realty', () => {
 
   describe('setPrice', () => {
     describe('when valid price', () => {
-      it('should set price when price is valid', () => {
+      it('returns price', () => {
         const validPrice = 150000;
         const realty = new Realty({
           title: 'some title',
@@ -104,46 +114,22 @@ describe('Realty', () => {
       });
     });
 
-    describe('when null price', () => {
-      it('should set price null when price is null', () => {
-        const nullPrice = null;
-        const realty = new Realty({
-          title: 'some title',
-          price: nullPrice,
-          type: RealtyType.APARTMENT,
-        });
-        expect(realty.price).toBe(nullPrice);
-      });
-    });
-
     describe('when invalid price', () => {
-      const EXPECTED_ERROR = 'price must be a positive number';
+      describe('when price is null', () => {
+        it("should throw error 'price_is_required'", () => {
+          expect(
+            () =>
+              new Realty({
+                title: 'some title',
+                price: null,
+                type: RealtyType.APARTMENT,
+              }),
+          ).toThrowError('price_is_required');
+        });
+      });
       it('should throw error when price is less than 0', () => {
+        const EXPECTED_ERROR = 'price must be a positive number';
         const invalidPrice = -100;
-        expect(
-          () =>
-            new Realty({
-              title: 'some title',
-              price: invalidPrice,
-              type: RealtyType.APARTMENT,
-            }),
-        ).toThrowError(EXPECTED_ERROR);
-      });
-
-      it('should throw error when price is 0', () => {
-        const invalidPrice = 0;
-        expect(
-          () =>
-            new Realty({
-              title: 'some title',
-              price: invalidPrice,
-              type: RealtyType.APARTMENT,
-            }),
-        ).toThrowError(EXPECTED_ERROR);
-      });
-
-      it('should throw error when price is not a number', () => {
-        const invalidPrice = 'string' as any;
         expect(
           () =>
             new Realty({
@@ -162,6 +148,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           type: RealtyType.APARTMENT,
+          price: 1000,
         });
         expect(realty.type).toBe(RealtyType.APARTMENT);
       });
@@ -172,6 +159,7 @@ describe('Realty', () => {
         const realty = new Realty({
           title: 'some title',
           type: RealtyType.HOUSE,
+          price: 1000,
         });
         expect(realty.type).toBe(RealtyType.HOUSE);
       });
@@ -186,6 +174,7 @@ describe('Realty', () => {
             new Realty({
               title: 'some title',
               type: null,
+              price: 1000,
             }),
         ).toThrowError(RealtyEntityErrorCodes.TYPE_IS_REQUIRED);
       });

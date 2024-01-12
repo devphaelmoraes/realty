@@ -5,7 +5,7 @@ import { RealtyException } from './realty.exception';
 interface RealtyProps {
   title: string;
   description?: string;
-  price?: number;
+  price: number;
   type: RealtyType;
 }
 
@@ -51,6 +51,9 @@ export class Realty {
   }
 
   private set price(value: number) {
+    if (!value) {
+      throw new Error('price_is_required');
+    }
     if (value != null && (value <= 0 || isNaN(value))) {
       throw new Error('price must be a positive number');
     }
