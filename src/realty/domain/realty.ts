@@ -2,6 +2,7 @@ interface RealtyProps {
   title: string;
   description?: string;
   price?: number;
+  type?: string;
 }
 
 export class Realty {
@@ -52,5 +53,9 @@ export class Realty {
 
   get price(): number {
     return this._price;
+  }
+
+  get type() {
+    return 'APARTMENT';
   }
 }

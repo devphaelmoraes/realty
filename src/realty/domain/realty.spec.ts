@@ -142,6 +142,19 @@ describe('Realty', () => {
     });
   });
 
+  describe('when valid type', () => {
+    describe('when type is APARTMENT', () => {
+      it('returns type', () => {
+        const validType = 'APARTMENT';
+        const realty = new Realty({
+          title: 'some title',
+          type: validType,
+        });
+        expect(realty.type).toBe(validType);
+      });
+    });
+  });
+
   it('should return a Realty', () => {
     const expected_value = {
       title: 'some title',
