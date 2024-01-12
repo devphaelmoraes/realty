@@ -13,6 +13,7 @@ export class Realty {
   private _title: string;
   private _description: string;
   private _price: number;
+  private _type: string;
 
   constructor(props: RealtyProps) {
     this.title = props.title;
@@ -63,9 +64,10 @@ export class Realty {
     if (!value) {
       throw new RealtyException(RealtyEntityErrorCodes.TYPE_IS_REQUIRED);
     }
+    this._type = value;
   }
 
   get type() {
-    return 'APARTMENT';
+    return this._type;
   }
 }
