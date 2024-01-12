@@ -1,3 +1,6 @@
+import { RealtyEntityErrorCodes } from './realty-error-codes';
+import { RealtyException } from './realty.exception';
+
 interface RealtyProps {
   title: string;
   description?: string;
@@ -58,7 +61,7 @@ export class Realty {
 
   set type(value) {
     if (!value) {
-      throw new Error('type_is_required');
+      throw new RealtyException(RealtyEntityErrorCodes.TYPE_IS_REQUIRED);
     }
   }
 

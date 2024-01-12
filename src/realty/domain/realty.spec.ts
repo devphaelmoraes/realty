@@ -1,4 +1,5 @@
 import { Realty } from './realty';
+import { RealtyEntityErrorCodes } from './realty-error-codes';
 
 describe('Realty', () => {
   describe('setTitle', () => {
@@ -171,7 +172,7 @@ describe('Realty', () => {
               title: 'some title',
               type: null,
             }),
-        ).toThrowError('type_is_required');
+        ).toThrowError(RealtyEntityErrorCodes.TYPE_IS_REQUIRED);
       });
     });
   });
