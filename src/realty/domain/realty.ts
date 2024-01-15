@@ -54,10 +54,12 @@ export class Realty {
 
   private set price(value: number) {
     if (!value) {
-      throw new Error('price_is_required');
+      throw new RealtyException(RealtyEntityErrorCodes.PRICE_IS_REQUIRED);
     }
     if (value != null && (value <= 0 || isNaN(value))) {
-      throw new Error('price must be a positive number');
+      throw new RealtyException(
+        RealtyEntityErrorCodes.PRICE_MUST_BE_A_POSITIVE_NUMBER,
+      );
     }
     this._price = value;
   }

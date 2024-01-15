@@ -130,7 +130,6 @@ describe('Realty', () => {
         });
       });
       it('should throw error when price is less than 0', () => {
-        const EXPECTED_ERROR = 'price must be a positive number';
         const invalidPrice = -100;
         expect(
           () =>
@@ -139,7 +138,7 @@ describe('Realty', () => {
               price: invalidPrice,
               type: RealtyType.APARTMENT,
             }),
-        ).toThrowError(EXPECTED_ERROR);
+        ).toThrowError(RealtyEntityErrorCodes.PRICE_MUST_BE_A_POSITIVE_NUMBER);
       });
     });
   });
