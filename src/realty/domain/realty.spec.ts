@@ -85,8 +85,6 @@ describe('Realty', () => {
       });
     });
     describe('when invalid description', () => {
-      const EXPECTED_ERROR =
-        'description must be less than or equal to 500 characters';
       it('should throw error when description length is more than 500 characters', () => {
         const longDescription =
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec elit et arcu malesuada porttitor vitae eleifend augue. Proin efficitur elit nunc, fermentum gravida elit eleifend ut. Donec bibendum maximus risus, quis aliquet nisl fermentum at. Nulla volutpat venenatis orci non venenatis. Sed at ligula vel dui faucibus auctor ac in nulla. Nam ut augue quis urna sodales vulputate. Maecenas efficitur, neque nec pulvinar volutpat, erat turpis blandit tellus, at malesuada diam felis eu tortor..';
@@ -98,7 +96,9 @@ describe('Realty', () => {
               type: RealtyType.APARTMENT,
               price: 1000,
             }),
-        ).toThrowError(EXPECTED_ERROR);
+        ).toThrowError(
+          RealtyEntityErrorCodes.DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500,
+        );
       });
     });
   });

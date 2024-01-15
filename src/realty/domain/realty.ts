@@ -41,8 +41,8 @@ export class Realty {
 
   private set description(value: string) {
     if (value && value.length > 500) {
-      throw new Error(
-        'description must be less than or equal to 500 characters',
+      throw new RealtyException(
+        RealtyEntityErrorCodes.DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500,
       );
     }
     this._description = value;
