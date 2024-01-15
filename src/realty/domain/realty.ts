@@ -25,10 +25,12 @@ export class Realty {
 
   private set title(value: string) {
     if (!value) {
-      throw new Error('title is required');
+      throw new RealtyException(RealtyEntityErrorCodes.TITLE_IS_REQUIRED);
     }
     if (value.length < 3 || value.length > 300) {
-      throw new Error('title must contain between 3 and 300 characters');
+      throw new RealtyException(
+        RealtyEntityErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
+      );
     }
     this._title = value;
   }

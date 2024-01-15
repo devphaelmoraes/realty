@@ -16,8 +16,6 @@ describe('Realty', () => {
       });
     });
     describe('when invalid title', () => {
-      const EXPECTED_ERROR = 'title must contain between 3 and 300 characters';
-
       it('should throw error when title is null', () => {
         const nullTitle = null;
         expect(
@@ -27,7 +25,7 @@ describe('Realty', () => {
               type: RealtyType.APARTMENT,
               price: 1000,
             }),
-        ).toThrowError('title is required');
+        ).toThrowError(RealtyEntityErrorCodes.TITLE_IS_REQUIRED);
       });
 
       it('should throw error when title length is less than 3 characters', () => {
@@ -39,7 +37,9 @@ describe('Realty', () => {
               type: RealtyType.APARTMENT,
               price: 1000,
             }),
-        ).toThrowError(EXPECTED_ERROR);
+        ).toThrowError(
+          RealtyEntityErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
+        );
       });
 
       it('should throw error when title length is more than 300 characters', () => {
@@ -52,7 +52,9 @@ describe('Realty', () => {
               type: RealtyType.APARTMENT,
               price: 1000,
             }),
-        ).toThrowError(EXPECTED_ERROR);
+        ).toThrowError(
+          RealtyEntityErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
+        );
       });
     });
   });
