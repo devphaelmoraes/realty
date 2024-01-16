@@ -56,7 +56,8 @@ export class Realty {
     if (!value) {
       throw new RealtyException(RealtyEntityErrorCodes.PRICE_IS_REQUIRED);
     }
-    if (value != null && (value <= 0 || isNaN(value))) {
+
+    if (value < 0) {
       throw new RealtyException(
         RealtyEntityErrorCodes.PRICE_MUST_BE_A_POSITIVE_NUMBER,
       );
