@@ -4,8 +4,8 @@ import { RealtyType } from './realty-type';
 
 describe('Realty', () => {
   describe('setTitle', () => {
-    describe('when valid title', () => {
-      it('should set title when title is valid', () => {
+    describe('when set valid title', () => {
+      it('should set title', () => {
         const title = 'valid title';
         const realty = new Realty({
           title,
@@ -15,8 +15,9 @@ describe('Realty', () => {
         expect(realty.title).toBe(title);
       });
     });
-    describe('when invalid title', () => {
-      it('should throw error when title is null', () => {
+
+    describe('when title is null', () => {
+      it('throws exception title_is_required', () => {
         const nullTitle = null;
         expect(
           () =>
@@ -27,8 +28,10 @@ describe('Realty', () => {
             }),
         ).toThrowError(RealtyEntityErrorCodes.TITLE_IS_REQUIRED);
       });
+    });
 
-      it('should throw error when title length is less than 3 characters', () => {
+    describe('when title length is less than 3 characters', () => {
+      it('throws exception title_must_be_greater_than_3_and_less_than_300', () => {
         const shortTitle = 'ab';
         expect(
           () =>
@@ -41,8 +44,10 @@ describe('Realty', () => {
           RealtyEntityErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
         );
       });
+    });
 
-      it('should throw error when title length is more than 300 characters', () => {
+    describe('when title length is more than 300 characters', () => {
+      it('throws exception title_must_be_greater_than_3_and_less_than_300', () => {
         const longTitle =
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec elit et arcu malesuada porttitor vitae eleifend augue. Proin efficitur elit nunc, fermentum gravida elit eleifend ut. Donec bibendum maximus risus, quis aliquet nisl fermentum at. Nulla volutpat venenatis orci non venenatis. Sed at ligula vel dui faucibus auctor ac in nulla. Nam ut augue quis urna sodales vulputate. Maecenas efficitur, neque nec pulvinar volutpat, erat turpis blandit tellus, at malesuada diam felis eu tortor..';
         expect(
