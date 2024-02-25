@@ -66,7 +66,7 @@ describe('Realty', () => {
 
   describe('setDescription', () => {
     describe('when valid description', () => {
-      it('should set description when description is valid', () => {
+      it('should set description', () => {
         const validDescription = 'some description';
         const realty = new Realty({
           title: 'some title',
@@ -77,8 +77,9 @@ describe('Realty', () => {
         expect(realty.description).toBe(validDescription);
       });
     });
+
     describe('when null description', () => {
-      it('should set description null when description is null', () => {
+      it('should set null description', () => {
         const nullDescription = null;
         const realty = new Realty({
           title: 'some title',
@@ -89,8 +90,9 @@ describe('Realty', () => {
         expect(realty.description).toBe(null);
       });
     });
-    describe('when invalid description', () => {
-      it('should throw error when description length is more than 500 characters', () => {
+
+    describe('when description length is more than 500 characters', () => {
+      it('throws exception description_must_be_less_than_or_equal_500', () => {
         const longDescription =
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec elit et arcu malesuada porttitor vitae eleifend augue. Proin efficitur elit nunc, fermentum gravida elit eleifend ut. Donec bibendum maximus risus, quis aliquet nisl fermentum at. Nulla volutpat venenatis orci non venenatis. Sed at ligula vel dui faucibus auctor ac in nulla. Nam ut augue quis urna sodales vulputate. Maecenas efficitur, neque nec pulvinar volutpat, erat turpis blandit tellus, at malesuada diam felis eu tortor..';
         expect(
@@ -110,7 +112,7 @@ describe('Realty', () => {
 
   describe('setPrice', () => {
     describe('when valid price', () => {
-      it('returns price', () => {
+      it('should set price', () => {
         const validPrice = 150000;
         const realty = new Realty({
           title: 'some title',
@@ -121,20 +123,21 @@ describe('Realty', () => {
       });
     });
 
-    describe('when invalid price', () => {
-      describe('when price is null', () => {
-        it("should throw error 'price_is_required'", () => {
-          expect(
-            () =>
-              new Realty({
-                title: 'some title',
-                price: null,
-                type: RealtyType.APARTMENT,
-              }),
-          ).toThrowError(RealtyEntityErrorCodes.PRICE_IS_REQUIRED);
-        });
+    describe('when price is null', () => {
+      it('throws exception price_is_required', () => {
+        expect(
+          () =>
+            new Realty({
+              title: 'some title',
+              price: null,
+              type: RealtyType.APARTMENT,
+            }),
+        ).toThrowError(RealtyEntityErrorCodes.PRICE_IS_REQUIRED);
       });
-      it('should throw error when price is less than 0', () => {
+    });
+
+    describe('when price is less than 0', () => {
+      it('throws exception price_must_be_a_positive_number', () => {
         const invalidPrice = -100;
         expect(
           () =>
@@ -148,9 +151,9 @@ describe('Realty', () => {
     });
   });
 
-  describe('when valid type', () => {
+  describe('setType', () => {
     describe('when type is APARTMENT', () => {
-      it('returns type', () => {
+      it('should set type', () => {
         const realty = new Realty({
           title: 'some title',
           type: RealtyType.APARTMENT,
@@ -161,7 +164,7 @@ describe('Realty', () => {
     });
 
     describe('when type is HOUSE', () => {
-      it('returns type', () => {
+      it('should set type', () => {
         const realty = new Realty({
           title: 'some title',
           type: RealtyType.HOUSE,
@@ -170,11 +173,9 @@ describe('Realty', () => {
         expect(realty.type).toBe(RealtyType.HOUSE);
       });
     });
-  });
 
-  describe('when invalid type', () => {
     describe('when type is null', () => {
-      it("should throw error 'type_is_required'", () => {
+      it('throws exception type_is_required', () => {
         expect(
           () =>
             new Realty({
@@ -187,25 +188,27 @@ describe('Realty', () => {
     });
   });
 
-  it('should return a Realty', () => {
-    const expected_value = {
-      title: 'some title',
-      description: 'some description',
-      price: 150000,
-      type: 'APARTMENT',
-    };
+  describe('when create a Realty', () => {
+    it('returns a Realty', () => {
+      const expected_value = {
+        title: 'some title',
+        description: 'some description',
+        price: 150000,
+        type: 'APARTMENT',
+      };
 
-    const realty = new Realty({
-      title: expected_value.title,
-      description: expected_value.description,
-      price: expected_value.price,
-      type: RealtyType.APARTMENT,
+      const realty = new Realty({
+        title: expected_value.title,
+        description: expected_value.description,
+        price: expected_value.price,
+        type: RealtyType.APARTMENT,
+      });
+
+      expect(realty).toBeInstanceOf(Realty);
+      expect(realty.title).toEqual(expected_value.title);
+      expect(realty.description).toEqual(expected_value.description);
+      expect(realty.price).toEqual(expected_value.price);
+      expect(realty.type).toEqual(expected_value.type);
     });
-
-    expect(realty).toBeInstanceOf(Realty);
-    expect(realty.title).toEqual(expected_value.title);
-    expect(realty.description).toEqual(expected_value.description);
-    expect(realty.price).toEqual(expected_value.price);
-    expect(realty.type).toEqual(expected_value.type);
   });
 });
