@@ -1,4 +1,4 @@
-export enum RealtyEntityErrorCodes {
+export enum RealtyErrorCodes {
   PRICE_IS_REQUIRED = 'price_is_required',
   PRICE_MUST_BE_A_POSITIVE_NUMBER = 'price_must_be_a_positive_number',
   TYPE_IS_REQUIRED = 'type_is_required',

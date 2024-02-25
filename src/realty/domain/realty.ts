@@ -1,4 +1,4 @@
-import { RealtyEntityErrorCodes } from './realty-error-codes';
+import { RealtyErrorCodes } from './realty-error-codes';
 import { RealtyType } from './realty-type';
 import { RealtyException } from './realty.exception';
 
@@ -25,11 +25,11 @@ export class Realty {
 
   private set title(value: string) {
     if (!value) {
-      throw new RealtyException(RealtyEntityErrorCodes.TITLE_IS_REQUIRED);
+      throw new RealtyException(RealtyErrorCodes.TITLE_IS_REQUIRED);
     }
     if (value.length < 3 || value.length > 300) {
       throw new RealtyException(
-        RealtyEntityErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
+        RealtyErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
       );
     }
     this._title = value;
@@ -42,7 +42,7 @@ export class Realty {
   private set description(value: string) {
     if (value && value.length > 500) {
       throw new RealtyException(
-        RealtyEntityErrorCodes.DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500,
+        RealtyErrorCodes.DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500,
       );
     }
     this._description = value;
@@ -54,12 +54,12 @@ export class Realty {
 
   private set price(value: number) {
     if (!value) {
-      throw new RealtyException(RealtyEntityErrorCodes.PRICE_IS_REQUIRED);
+      throw new RealtyException(RealtyErrorCodes.PRICE_IS_REQUIRED);
     }
 
     if (value < 0) {
       throw new RealtyException(
-        RealtyEntityErrorCodes.PRICE_MUST_BE_A_POSITIVE_NUMBER,
+        RealtyErrorCodes.PRICE_MUST_BE_A_POSITIVE_NUMBER,
       );
     }
     this._price = value;
@@ -71,7 +71,7 @@ export class Realty {
 
   set type(value) {
     if (!value) {
-      throw new RealtyException(RealtyEntityErrorCodes.TYPE_IS_REQUIRED);
+      throw new RealtyException(RealtyErrorCodes.TYPE_IS_REQUIRED);
     }
     this._type = value;
   }

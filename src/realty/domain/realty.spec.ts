@@ -1,5 +1,5 @@
 import { Realty } from './realty';
-import { RealtyEntityErrorCodes } from './realty-error-codes';
+import { RealtyErrorCodes } from './realty-error-codes';
 import { RealtyType } from './realty-type';
 
 describe('Realty', () => {
@@ -26,7 +26,7 @@ describe('Realty', () => {
               type: RealtyType.APARTMENT,
               price: 1000,
             }),
-        ).toThrowError(RealtyEntityErrorCodes.TITLE_IS_REQUIRED);
+        ).toThrowError(RealtyErrorCodes.TITLE_IS_REQUIRED);
       });
     });
 
@@ -41,7 +41,7 @@ describe('Realty', () => {
               price: 1000,
             }),
         ).toThrowError(
-          RealtyEntityErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
+          RealtyErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
         );
       });
     });
@@ -58,7 +58,7 @@ describe('Realty', () => {
               price: 1000,
             }),
         ).toThrowError(
-          RealtyEntityErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
+          RealtyErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
         );
       });
     });
@@ -104,7 +104,7 @@ describe('Realty', () => {
               price: 1000,
             }),
         ).toThrowError(
-          RealtyEntityErrorCodes.DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500,
+          RealtyErrorCodes.DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500,
         );
       });
     });
@@ -132,7 +132,7 @@ describe('Realty', () => {
               price: null,
               type: RealtyType.APARTMENT,
             }),
-        ).toThrowError(RealtyEntityErrorCodes.PRICE_IS_REQUIRED);
+        ).toThrowError(RealtyErrorCodes.PRICE_IS_REQUIRED);
       });
     });
 
@@ -146,7 +146,7 @@ describe('Realty', () => {
               price: invalidPrice,
               type: RealtyType.APARTMENT,
             }),
-        ).toThrowError(RealtyEntityErrorCodes.PRICE_MUST_BE_A_POSITIVE_NUMBER);
+        ).toThrowError(RealtyErrorCodes.PRICE_MUST_BE_A_POSITIVE_NUMBER);
       });
     });
   });
@@ -183,7 +183,7 @@ describe('Realty', () => {
               type: null,
               price: 1000,
             }),
-        ).toThrowError(RealtyEntityErrorCodes.TYPE_IS_REQUIRED);
+        ).toThrowError(RealtyErrorCodes.TYPE_IS_REQUIRED);
       });
     });
   });
