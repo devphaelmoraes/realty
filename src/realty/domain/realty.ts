@@ -1,7 +1,12 @@
+import { RealtyErrorCodes } from './realty-error-codes';
+import { RealtyType } from './realty-type';
+import { RealtyException } from './realty.exception';
+
 interface RealtyProps {
   title: string;
   description?: string;
-  price?: number;
+  price: number;
+  type: RealtyType;
 }
 
 export class Realty {
@@ -9,44 +14,69 @@ export class Realty {
   private _title: string;
   private _description: string;
   private _price: number;
+  private _type: RealtyType;
 
-  private constructor(props: RealtyProps) {
-    this._title = props.title;
-    this._description = props.description;
-    this._price = props.price;
+  constructor(props: RealtyProps) {
+    this.title = props.title;
+    this.description = props.description;
+    this.price = props.price;
+    this.type = props.type;
   }
 
-  public static create(props: RealtyProps) {
-    if (!props.title) {
-      throw new Error('title is required');
+  private set title(value: string) {
+    if (!value) {
+      throw new RealtyException(RealtyErrorCodes.TITLE_IS_REQUIRED);
     }
-
-    if (props.title.length < 3 || props.title.length > 300) {
-      throw new Error('title must contain between 3 and 300 characters');
-    }
-
-    if (props.description?.length > 500) {
-      throw new Error(
-        'description must be less than or equal to 500 characters',
+    if (value.length < 3 || value.length > 300) {
+      throw new RealtyException(
+        RealtyErrorCodes.TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300,
       );
     }
-
-    if (props.price != null && props.price <= 0) {
-      throw new Error('price must be greater than 0');
-    }
-
-    return new Realty(props);
+    this._title = value;
   }
 
   get title(): string {
     return this._title;
   }
 
+  private set description(value: string) {
+    if (value && value.length > 500) {
+      throw new RealtyException(
+        RealtyErrorCodes.DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500,
+      );
+    }
+    this._description = value;
+  }
+
   get description(): string {
     return this._description;
   }
 
+  private set price(value: number) {
+    if (!value) {
+      throw new RealtyException(RealtyErrorCodes.PRICE_IS_REQUIRED);
+    }
+
+    if (value < 0) {
+      throw new RealtyException(
+        RealtyErrorCodes.PRICE_MUST_BE_A_POSITIVE_NUMBER,
+      );
+    }
+    this._price = value;
+  }
+
   get price(): number {
     return this._price;
+  }
+
+  set type(value) {
+    if (!value) {
+      throw new RealtyException(RealtyErrorCodes.TYPE_IS_REQUIRED);
+    }
+    this._type = value;
+  }
+
+  get type() {
+    return this._type;
   }
 }
