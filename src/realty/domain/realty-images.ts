@@ -16,16 +16,20 @@ export class RealtyImages {
       throw new RealtyImagesException(RealtyImagesErrorCodes.IMAGE_IS_REQUIRED);
     }
 
-    if (this.images.length === MAX_IMAGES) {
-      throw new RealtyImagesException(
-        RealtyImagesErrorCodes.MAX_IMAGES_EXCEEDED,
-      );
-    }
+    this.checkMaxImagesLimit();
 
     this.images.push(image);
   }
 
   public getImages(): RealtyImagesProps[] {
     return this.images;
+  }
+
+  private checkMaxImagesLimit(): void {
+    if (this.images.length === MAX_IMAGES) {
+      throw new RealtyImagesException(
+        RealtyImagesErrorCodes.MAX_IMAGES_EXCEEDED,
+      );
+    }
   }
 }
