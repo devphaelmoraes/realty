@@ -1,14 +1,16 @@
+interface RealtyImagesProps {
+  url: string;
+  isCover: boolean;
+}
+
 export class RealtyImages {
-  public setImage(image: any): void {
-    return image;
+  private images: RealtyImagesProps[] = [];
+
+  public setImage(image: RealtyImagesProps): void {
+    this.images.push(image);
   }
 
-  public getImages() {
-    return [
-      {
-        url: 'https://myimage.com',
-        isCover: true,
-      },
-    ];
+  public getImages(): RealtyImagesProps[] {
+    return this.images;
   }
 }
