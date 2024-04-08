@@ -21,7 +21,6 @@ export class RealtyImages {
         RealtyImagesErrorCodes.MAX_IMAGES_EXCEEDED,
       );
     }
-
     this.images.push(image);
   }
 
@@ -30,6 +29,6 @@ export class RealtyImages {
   }
 
   private isAtMaxImagesLimit(): boolean {
-    return this.images.length === MAX_IMAGES;
+    return this.images.length >= MAX_IMAGES;
   }
 }
