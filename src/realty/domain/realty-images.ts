@@ -11,12 +11,16 @@ interface RealtyImagesProps {
 export class RealtyImages {
   private images: RealtyImagesProps[] = [];
 
-  public setImage(image: RealtyImagesProps): void {
+  public addImage(image: RealtyImagesProps): void {
     if (!image.url) {
       throw new RealtyImagesException(RealtyImagesErrorCodes.IMAGE_IS_REQUIRED);
     }
 
-    this.checkMaxImagesLimit();
+    if (this.isAtMaxImagesLimit()) {
+      throw new RealtyImagesException(
+        RealtyImagesErrorCodes.MAX_IMAGES_EXCEEDED,
+      );
+    }
 
     this.images.push(image);
   }
@@ -25,11 +29,7 @@ export class RealtyImages {
     return this.images;
   }
 
-  private checkMaxImagesLimit(): void {
-    if (this.images.length === MAX_IMAGES) {
-      throw new RealtyImagesException(
-        RealtyImagesErrorCodes.MAX_IMAGES_EXCEEDED,
-      );
-    }
+  private isAtMaxImagesLimit(): boolean {
+    return this.images.length === MAX_IMAGES;
   }
 }
