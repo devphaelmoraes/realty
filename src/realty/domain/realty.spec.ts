@@ -1,5 +1,6 @@
 import { Realty } from './realty';
 import { RealtyErrorCodes } from './realty-error-codes';
+import { RealtyImage } from './realty-image';
 import { RealtyType } from './realty-type';
 
 describe('Realty', () => {
@@ -209,6 +210,38 @@ describe('Realty', () => {
       expect(realty.description).toEqual(expected_value.description);
       expect(realty.price).toEqual(expected_value.price);
       expect(realty.type).toEqual(expected_value.type);
+    });
+  });
+
+  describe('setImages', () => {
+    describe('when set valid images', () => {
+      it('should set realty images', () => {
+        const expected_value = {
+          title: 'some title',
+          price: 150000,
+          type: 'APARTMENT',
+          images: [
+            new RealtyImage({
+              url: 'https://myimage.com/1',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/2',
+              isCover: true,
+            }),
+          ],
+        };
+
+        const realty = new Realty({
+          title: expected_value.title,
+          price: expected_value.price,
+          type: RealtyType.APARTMENT,
+          images: expected_value.images,
+        });
+        expect(realty.price).toEqual(expected_value.price);
+        expect(realty.type).toEqual(expected_value.type);
+        expect(realty.images).toEqual(expected_value.images);
+      });
     });
   });
 });
