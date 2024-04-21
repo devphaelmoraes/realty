@@ -283,5 +283,50 @@ describe('Realty', () => {
         expect(realty.images).toHaveLength(5);
       });
     });
+
+    describe('when attempting to set more than 5 images', () => {
+      it('throws exception max_images_exceeded', () => {
+        const expected_value = {
+          title: 'some title',
+          price: 150000,
+          type: 'APARTMENT',
+          images: [
+            new RealtyImage({
+              url: 'https://myimage.com/1',
+              isCover: true,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/2',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/3',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/4',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/5',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/6',
+              isCover: false,
+            }),
+          ],
+        };
+
+        expect(() => {
+          new Realty({
+            title: expected_value.title,
+            price: expected_value.price,
+            type: RealtyType.APARTMENT,
+            images: expected_value.images,
+          });
+        }).toThrowError(RealtyErrorCodes.MAX_IMAGES_EXCEEDED);
+      });
+    });
   });
 });

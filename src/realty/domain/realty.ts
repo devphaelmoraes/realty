@@ -3,6 +3,8 @@ import { RealtyImage } from './realty-image';
 import { RealtyType } from './realty-type';
 import { RealtyException } from './realty.exception';
 
+const REALTY_MAX_IMAGES = 5;
+
 interface RealtyProps {
   title: string;
   description?: string;
@@ -84,11 +86,18 @@ export class Realty {
     return this._type;
   }
 
-  private set images(value: RealtyImage[]) {
-    this._images = value;
+  private set images(values: RealtyImage[]) {
+    if (this.isAtMaxImagesLimit(values)) {
+      throw new RealtyException(RealtyErrorCodes.MAX_IMAGES_EXCEEDED);
+    }
+    this._images = values;
   }
 
   get images(): RealtyImage[] {
     return this._images;
+  }
+
+  private isAtMaxImagesLimit(images: RealtyImage[]): boolean {
+    return images?.length > REALTY_MAX_IMAGES;
   }
 }
