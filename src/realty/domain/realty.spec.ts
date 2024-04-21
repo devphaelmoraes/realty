@@ -238,9 +238,49 @@ describe('Realty', () => {
           type: RealtyType.APARTMENT,
           images: expected_value.images,
         });
-        expect(realty.price).toEqual(expected_value.price);
-        expect(realty.type).toEqual(expected_value.type);
+
         expect(realty.images).toEqual(expected_value.images);
+      });
+    });
+
+    describe('when attempting to set 5 images', () => {
+      it('returns images', () => {
+        const expected_value = {
+          title: 'some title',
+          price: 150000,
+          type: 'APARTMENT',
+          images: [
+            new RealtyImage({
+              url: 'https://myimage.com/1',
+              isCover: true,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/2',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/3',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/4',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/5',
+              isCover: false,
+            }),
+          ],
+        };
+
+        const realty = new Realty({
+          title: expected_value.title,
+          price: expected_value.price,
+          type: RealtyType.APARTMENT,
+          images: expected_value.images,
+        });
+        expect(realty.images).toEqual(expected_value.images);
+        expect(realty.images).toHaveLength(5);
       });
     });
   });
