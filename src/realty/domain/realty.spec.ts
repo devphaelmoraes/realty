@@ -328,5 +328,34 @@ describe('Realty', () => {
         }).toThrowError(RealtyErrorCodes.MAX_IMAGES_EXCEEDED);
       });
     });
+
+    describe('when attempting to set more than 1 image marked as cover', () => {
+      it('throws exception duplicated_cover', () => {
+        const expected_value = {
+          title: 'some title',
+          price: 150000,
+          type: 'APARTMENT',
+          images: [
+            new RealtyImage({
+              url: 'https://myimage.com/1',
+              isCover: true,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/2',
+              isCover: true,
+            }),
+          ],
+        };
+
+        expect(() => {
+          new Realty({
+            title: expected_value.title,
+            price: expected_value.price,
+            type: RealtyType.APARTMENT,
+            images: expected_value.images,
+          });
+        }).toThrowError(RealtyErrorCodes.DUPLICATED_COVER);
+      });
+    });
   });
 });

@@ -6,4 +6,5 @@ export enum RealtyErrorCodes {
   TITLE_MUST_BE_GREATER_THAN_3_AND_LESS_THAN_300 = 'title_must_be_greater_than_3_and_less_than_300',
   DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500 = 'description_must_be_less_than_or_equal_500',
   MAX_IMAGES_EXCEEDED = 'max_images_exceeded',
+  DUPLICATED_COVER = 'duplicated_cover',
 }

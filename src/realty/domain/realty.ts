@@ -90,6 +90,11 @@ export class Realty {
     if (this.isAtMaxImagesLimit(values)) {
       throw new RealtyException(RealtyErrorCodes.MAX_IMAGES_EXCEEDED);
     }
+
+    if (this.isDuplicatedCover(values)) {
+      throw new RealtyException(RealtyErrorCodes.DUPLICATED_COVER);
+    }
+
     this._images = values;
   }
 
@@ -99,5 +104,9 @@ export class Realty {
 
   private isAtMaxImagesLimit(images: RealtyImage[]): boolean {
     return images?.length > REALTY_MAX_IMAGES;
+  }
+
+  private isDuplicatedCover(images: RealtyImage[]): boolean {
+    return images?.filter((image) => image.isCover).length > 1;
   }
 }
