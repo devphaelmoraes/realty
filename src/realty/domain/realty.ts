@@ -1,12 +1,16 @@
 import { RealtyErrorCodes } from './realty-error-codes';
+import { RealtyImage } from './realty-image';
 import { RealtyType } from './realty-type';
 import { RealtyException } from './realty.exception';
+
+const REALTY_MAX_IMAGES = 5;
 
 interface RealtyProps {
   title: string;
   description?: string;
   price: number;
   type: RealtyType;
+  images?: RealtyImage[];
 }
 
 export class Realty {
@@ -15,12 +19,14 @@ export class Realty {
   private _description: string;
   private _price: number;
   private _type: RealtyType;
+  private _images: RealtyImage[];
 
   constructor(props: RealtyProps) {
     this.title = props.title;
     this.description = props.description;
     this.price = props.price;
     this.type = props.type;
+    this.images = props.images;
   }
 
   private set title(value: string) {
@@ -78,5 +84,29 @@ export class Realty {
 
   get type() {
     return this._type;
+  }
+
+  private set images(values: RealtyImage[]) {
+    if (this.isAtMaxImagesLimit(values)) {
+      throw new RealtyException(RealtyErrorCodes.MAX_IMAGES_EXCEEDED);
+    }
+
+    if (this.isDuplicatedCover(values)) {
+      throw new RealtyException(RealtyErrorCodes.DUPLICATED_COVER);
+    }
+
+    this._images = values;
+  }
+
+  get images(): RealtyImage[] {
+    return this._images;
+  }
+
+  private isAtMaxImagesLimit(images: RealtyImage[]): boolean {
+    return images?.length > REALTY_MAX_IMAGES;
+  }
+
+  private isDuplicatedCover(images: RealtyImage[]): boolean {
+    return images?.filter((image) => image.isCover).length > 1;
   }
 }

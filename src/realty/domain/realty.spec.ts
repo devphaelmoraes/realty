@@ -1,5 +1,6 @@
 import { Realty } from './realty';
 import { RealtyErrorCodes } from './realty-error-codes';
+import { RealtyImage } from './realty-image';
 import { RealtyType } from './realty-type';
 
 describe('Realty', () => {
@@ -209,6 +210,152 @@ describe('Realty', () => {
       expect(realty.description).toEqual(expected_value.description);
       expect(realty.price).toEqual(expected_value.price);
       expect(realty.type).toEqual(expected_value.type);
+    });
+  });
+
+  describe('setImages', () => {
+    describe('when set valid images', () => {
+      it('should set realty images', () => {
+        const expected_value = {
+          title: 'some title',
+          price: 150000,
+          type: 'APARTMENT',
+          images: [
+            new RealtyImage({
+              url: 'https://myimage.com/1',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/2',
+              isCover: true,
+            }),
+          ],
+        };
+
+        const realty = new Realty({
+          title: expected_value.title,
+          price: expected_value.price,
+          type: RealtyType.APARTMENT,
+          images: expected_value.images,
+        });
+
+        expect(realty.images).toEqual(expected_value.images);
+      });
+    });
+
+    describe('when attempting to set 5 images', () => {
+      it('returns images', () => {
+        const expected_value = {
+          title: 'some title',
+          price: 150000,
+          type: 'APARTMENT',
+          images: [
+            new RealtyImage({
+              url: 'https://myimage.com/1',
+              isCover: true,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/2',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/3',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/4',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/5',
+              isCover: false,
+            }),
+          ],
+        };
+
+        const realty = new Realty({
+          title: expected_value.title,
+          price: expected_value.price,
+          type: RealtyType.APARTMENT,
+          images: expected_value.images,
+        });
+        expect(realty.images).toEqual(expected_value.images);
+        expect(realty.images).toHaveLength(5);
+      });
+    });
+
+    describe('when attempting to set more than 5 images', () => {
+      it('throws exception max_images_exceeded', () => {
+        const expected_value = {
+          title: 'some title',
+          price: 150000,
+          type: 'APARTMENT',
+          images: [
+            new RealtyImage({
+              url: 'https://myimage.com/1',
+              isCover: true,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/2',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/3',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/4',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/5',
+              isCover: false,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/6',
+              isCover: false,
+            }),
+          ],
+        };
+
+        expect(() => {
+          new Realty({
+            title: expected_value.title,
+            price: expected_value.price,
+            type: RealtyType.APARTMENT,
+            images: expected_value.images,
+          });
+        }).toThrowError(RealtyErrorCodes.MAX_IMAGES_EXCEEDED);
+      });
+    });
+
+    describe('when attempting to set more than 1 image marked as cover', () => {
+      it('throws exception duplicated_cover', () => {
+        const expected_value = {
+          title: 'some title',
+          price: 150000,
+          type: 'APARTMENT',
+          images: [
+            new RealtyImage({
+              url: 'https://myimage.com/1',
+              isCover: true,
+            }),
+            new RealtyImage({
+              url: 'https://myimage.com/2',
+              isCover: true,
+            }),
+          ],
+        };
+
+        expect(() => {
+          new Realty({
+            title: expected_value.title,
+            price: expected_value.price,
+            type: RealtyType.APARTMENT,
+            images: expected_value.images,
+          });
+        }).toThrowError(RealtyErrorCodes.DUPLICATED_COVER);
+      });
     });
   });
 });
