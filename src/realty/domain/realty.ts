@@ -109,4 +109,12 @@ export class Realty {
   private isDuplicatedCover(images: RealtyImage[]): boolean {
     return images?.filter((image) => image.isCover).length > 1;
   }
+
+  public removeImage(id: number): void {
+    const imgIdx = this.images.findIndex((image) => image.id === id);
+    if (imgIdx === -1) {
+      throw new RealtyException(RealtyErrorCodes.IMAGE_NOT_FOUND);
+    }
+    this.images.splice(imgIdx, 1);
+  }
 }

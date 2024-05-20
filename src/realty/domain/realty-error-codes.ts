@@ -7,4 +7,5 @@ export enum RealtyErrorCodes {
   DESCRIPTION_MUST_BE_LESS_THAN_OR_EQUAL_500 = 'description_must_be_less_than_or_equal_500',
   MAX_IMAGES_EXCEEDED = 'max_images_exceeded',
   DUPLICATED_COVER = 'duplicated_cover',
+  IMAGE_NOT_FOUND = 'image_not_found',
 }
