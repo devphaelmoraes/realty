@@ -5,8 +5,8 @@ describe('RealtyAddress', () => {
   describe('when set street', () => {
     it('should set street', () => {
       const street = 'a'.repeat(250);
-      const realty = new RealtyAddress({ street });
-      expect(realty.street).toBe(street);
+      const realtyAddress = new RealtyAddress({ street, zipCode: 12345678 });
+      expect(realtyAddress.street).toBe(street);
     });
   });
 
@@ -16,6 +16,7 @@ describe('RealtyAddress', () => {
         () =>
           new RealtyAddress({
             street: null,
+            zipCode: 12345678,
           }),
       ).toThrowError(RealtyAddressErrorCodes.STREET_IS_REQUIRED);
     });
@@ -28,10 +29,22 @@ describe('RealtyAddress', () => {
         () =>
           new RealtyAddress({
             street: longStreet,
+            zipCode: 12345678,
           }),
       ).toThrowError(
         RealtyAddressErrorCodes.STREET_MUST_BE_LESS_THAN_OR_EQUAL_250,
       );
+    });
+  });
+
+  describe('when set zipCode', () => {
+    it('should set zipCode', () => {
+      const zipCode = 65066320;
+      const realtyAddress = new RealtyAddress({
+        street: 'street',
+        zipCode,
+      });
+      expect(realtyAddress.zipCode).toBe(zipCode);
     });
   });
 });
