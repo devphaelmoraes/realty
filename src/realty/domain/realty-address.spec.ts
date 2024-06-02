@@ -1,4 +1,5 @@
 import { RealtyAddress } from './realty-address';
+import { RealtyAddressErrorCodes } from './realty-address-error-codes';
 
 describe('RealtyAddress', () => {
   describe('when set street', () => {
@@ -16,7 +17,7 @@ describe('RealtyAddress', () => {
           new RealtyAddress({
             street: null,
           }),
-      ).toThrowError('street_is_required');
+      ).toThrowError(RealtyAddressErrorCodes.STREET_IS_REQUIRED);
     });
   });
 });

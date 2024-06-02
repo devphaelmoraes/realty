@@ -1,3 +1,6 @@
+import { RealtyAddressErrorCodes } from './realty-address-error-codes';
+import { RealtyAddressException } from './realty-address.exception';
+
 interface RealtyAddressProps {
   street: string;
 }
@@ -11,7 +14,9 @@ export class RealtyAddress {
 
   set street(value: string) {
     if (!value) {
-      throw new Error('street_is_required');
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.STREET_IS_REQUIRED,
+      );
     }
     this._street = value;
   }
