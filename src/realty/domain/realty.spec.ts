@@ -389,7 +389,7 @@ describe('Realty', () => {
       });
     });
 
-    it('returns image list without removed image', () => {
+    it('keep the remaining image', () => {
       const imageId = 2;
       realty.removeImage(imageId);
       expect(realty.images).toHaveLength(1);
@@ -402,11 +402,13 @@ describe('Realty', () => {
       ]);
     });
 
-    it('return an empty realty images', () => {
-      const imageId = 1;
-      realty.removeImage(imageId);
-      expect(realty.images).toHaveLength(0);
-      expect(realty.images).toEqual([]);
+    describe("and it's the last image in the list", () => {
+      it('returns an empty list', () => {
+        const imageId = 1;
+        realty.removeImage(imageId);
+        expect(realty.images).toHaveLength(0);
+        expect(realty.images).toEqual([]);
+      });
     });
 
     it('throws exception image_not_found', () => {
