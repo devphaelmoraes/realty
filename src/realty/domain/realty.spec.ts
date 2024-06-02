@@ -358,4 +358,65 @@ describe('Realty', () => {
       });
     });
   });
+
+  describe('when remove image', () => {
+    let realty: Realty;
+    const images: RealtyImage[] = [
+      new RealtyImage({
+        id: 1,
+        url: 'https://myimage.com/1',
+        isCover: true,
+      }),
+      new RealtyImage({
+        id: 2,
+        url: 'https://myimage.com/2',
+        isCover: false,
+      }),
+    ];
+
+    beforeEach(() => {
+      const expected_value = {
+        title: 'my realty',
+        price: 750000,
+        type: 'HOUSE',
+        images,
+      };
+      realty = new Realty({
+        title: expected_value.title,
+        price: expected_value.price,
+        type: RealtyType.APARTMENT,
+        images: expected_value.images,
+      });
+    });
+
+    it('keep the remaining image', () => {
+      const imageId = 2;
+      realty.removeImage(imageId);
+      expect(realty.images).toHaveLength(1);
+      expect(realty.images).toEqual([
+        new RealtyImage({
+          id: 1,
+          url: 'https://myimage.com/1',
+          isCover: true,
+        }),
+      ]);
+    });
+
+    describe("and it's the last image in the list", () => {
+      it('returns an empty list', () => {
+        const imageId = 1;
+        realty.removeImage(imageId);
+        expect(realty.images).toHaveLength(0);
+        expect(realty.images).toEqual([]);
+      });
+    });
+
+    it('throws exception image_not_found', () => {
+      const imageId = 3;
+      expect(() => {
+        realty.removeImage(imageId);
+      }).toThrowError(RealtyErrorCodes.IMAGE_NOT_FOUND);
+      expect(realty.images).toHaveLength(images.length);
+    });
+  });
 });
