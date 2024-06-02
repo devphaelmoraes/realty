@@ -18,6 +18,11 @@ export class RealtyAddress {
         RealtyAddressErrorCodes.STREET_IS_REQUIRED,
       );
     }
+    if (value.length > 250) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.STREET_MUST_BE_LESS_THAN_OR_EQUAL_250,
+      );
+    }
     this._street = value;
   }
 
