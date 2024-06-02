@@ -10,6 +10,9 @@ export class RealtyAddress {
   }
 
   set street(value: string) {
+    if (!value) {
+      throw new Error('street_is_required');
+    }
     this._street = value;
   }
 

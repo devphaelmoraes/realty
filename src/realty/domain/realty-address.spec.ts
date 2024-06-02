@@ -8,4 +8,15 @@ describe('RealtyAddress', () => {
       expect(realty.street).toBe(street);
     });
   });
+
+  describe('when street is null', () => {
+    it('throws exception street_is_required', () => {
+      expect(
+        () =>
+          new RealtyAddress({
+            street: null,
+          }),
+      ).toThrowError('street_is_required');
+    });
+  });
 });
