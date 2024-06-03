@@ -332,7 +332,9 @@ describe('RealtyAddress', () => {
             cityId: 1,
             stateId: -1,
           }),
-      ).toThrowError(RealtyAddressErrorCodes.STATE_ID_MUST_BE_A_POSITIVE_NUMBER);
+      ).toThrowError(
+        RealtyAddressErrorCodes.STATE_ID_MUST_BE_A_POSITIVE_NUMBER,
+      );
     });
   });
 });
