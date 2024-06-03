@@ -6,6 +6,7 @@ interface RealtyAddressProps {
   zipCode: string;
   houseNumber: number;
   complement?: string;
+  cityId: number;
 }
 
 export class RealtyAddress {
@@ -13,12 +14,14 @@ export class RealtyAddress {
   _zipCode: string;
   _houseNumber: number;
   _complement: string;
+  _cityId: number;
 
   constructor(realtyAddressProps: RealtyAddressProps) {
     this.street = realtyAddressProps.street;
     this.zipCode = realtyAddressProps.zipCode;
     this.houseNumber = realtyAddressProps.houseNumber;
     this.complement = realtyAddressProps.complement;
+    this.cityId = realtyAddressProps.cityId;
   }
 
   private set street(value: string) {
@@ -87,5 +90,18 @@ export class RealtyAddress {
 
   get complement(): string {
     return this._complement;
+  }
+
+  private set cityId(value: number) {
+    if (value < 1) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.CITY_ID_MUST_BE_A_POSITIVE_NUMBER,
+      );
+    }
+    this._cityId = value;
+  }
+
+  get cityId(): number {
+    return this._cityId;
   }
 }
