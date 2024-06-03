@@ -56,6 +56,11 @@ export class RealtyAddress {
   }
 
   private set houseNumber(value: number) {
+    if (value < 0) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.HOUSE_NUMBER_MUST_BE_A_POSITIVE_NUMBER,
+      );
+    }
     this._houseNumber = value;
   }
 

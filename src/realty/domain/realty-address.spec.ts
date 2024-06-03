@@ -92,4 +92,19 @@ describe('RealtyAddress', () => {
       expect(realtyAddress.houseNumber).toBe(houseNumber);
     });
   });
+
+  describe('when houseNumber is negative number', () => {
+    it('throws exception house_number_must_be_a_positive_number', () => {
+      expect(
+        () =>
+          new RealtyAddress({
+            street: 'a',
+            zipCode: '65066-320',
+            houseNumber: -1,
+          }),
+      ).toThrowError(
+        RealtyAddressErrorCodes.HOUSE_NUMBER_MUST_BE_A_POSITIVE_NUMBER,
+      );
+    });
+  });
 });
