@@ -157,6 +157,45 @@ describe('RealtyAddress', () => {
     });
   });
 
+  describe('when complement is null', () => {
+    it('should set complement', () => {
+      const complement = null;
+      const realtyAddress = new RealtyAddress({
+        street: 'street',
+        zipCode: '65066-320',
+        houseNumber: 1,
+        complement,
+      });
+      expect(realtyAddress.complement).toBe(complement);
+    });
+  });
+
+  describe('when complement is empty', () => {
+    it('should set complement', () => {
+      const complement = '';
+      const realtyAddress = new RealtyAddress({
+        street: 'street',
+        zipCode: '65066-320',
+        houseNumber: 1,
+        complement,
+      });
+      expect(realtyAddress.complement).toBe(complement);
+    });
+  });
+
+  describe('when complement is undefined', () => {
+    it('should set complement', () => {
+      const complement = undefined;
+      const realtyAddress = new RealtyAddress({
+        street: 'street',
+        zipCode: '65066-320',
+        houseNumber: 1,
+        complement,
+      });
+      expect(realtyAddress.complement).toBe(complement);
+    });
+  });
+
   describe('when complement is greater then 500', () => {
     it('throws exception complement_must_be_less_than_500', () => {
       const complement = 'a'.repeat(501);
