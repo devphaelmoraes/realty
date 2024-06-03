@@ -93,6 +93,11 @@ export class RealtyAddress {
   }
 
   private set cityId(value: number) {
+    if (!value) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.CITY_ID_IS_REQUIRED,
+      );
+    }
     if (value < 1) {
       throw new RealtyAddressException(
         RealtyAddressErrorCodes.CITY_ID_MUST_BE_A_POSITIVE_NUMBER,

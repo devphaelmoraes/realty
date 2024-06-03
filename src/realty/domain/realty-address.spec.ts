@@ -243,6 +243,20 @@ describe('RealtyAddress', () => {
     });
   });
 
+  describe('when cityId is null', () => {
+    it('throws exception city_id_is_required', () => {
+      expect(
+        () =>
+          new RealtyAddress({
+            street: 'a',
+            zipCode: '65066-320',
+            houseNumber: 1,
+            cityId: null,
+          }),
+      ).toThrowError(RealtyAddressErrorCodes.CITY_ID_IS_REQUIRED);
+    });
+  });
+
   describe('when cityId is negative number', () => {
     it('throws exception city_id_must_be_a_positive_number', () => {
       expect(
