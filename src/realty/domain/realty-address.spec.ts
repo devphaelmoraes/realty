@@ -91,6 +91,42 @@ describe('RealtyAddress', () => {
       });
       expect(realtyAddress.houseNumber).toBe(houseNumber);
     });
+
+    it('and houseNumber is 0', () => {
+      const houseNumber = 0;
+      const realtyAddress = new RealtyAddress({
+        street: 'street',
+        zipCode: '65066-320',
+        houseNumber,
+      });
+      expect(realtyAddress.houseNumber).toBe(houseNumber);
+    });
+  });
+
+  describe('when houseNumber is null', () => {
+    it('throws exception house_is_required', () => {
+      expect(
+        () =>
+          new RealtyAddress({
+            street: 'a',
+            zipCode: '65066-320',
+            houseNumber: null,
+          }),
+      ).toThrowError(RealtyAddressErrorCodes.HOUSE_NUMBER_IS_REQUIRED);
+    });
+  });
+
+  describe('when houseNumber is undefined', () => {
+    it('throws exception house_is_required', () => {
+      expect(
+        () =>
+          new RealtyAddress({
+            street: 'a',
+            zipCode: '65066-320',
+            houseNumber: undefined,
+          }),
+      ).toThrowError(RealtyAddressErrorCodes.HOUSE_NUMBER_IS_REQUIRED);
+    });
   });
 
   describe('when houseNumber is negative number', () => {
