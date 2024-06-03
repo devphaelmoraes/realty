@@ -101,7 +101,7 @@ export class RealtyAddress {
         RealtyAddressErrorCodes.CITY_ID_IS_REQUIRED,
       );
     }
-    if (value < 1) {
+    if (value < 0) {
       throw new RealtyAddressException(
         RealtyAddressErrorCodes.CITY_ID_MUST_BE_A_POSITIVE_NUMBER,
       );
@@ -117,6 +117,12 @@ export class RealtyAddress {
     if (!value) {
       throw new RealtyAddressException(
         RealtyAddressErrorCodes.STATE_ID_IS_REQUIRED,
+      );
+    }
+
+    if (value < 0) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.STATE_ID_MUST_BE_A_POSITIVE_NUMBER,
       );
     }
     this._stateId = value;

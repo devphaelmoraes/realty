@@ -9,4 +9,5 @@ export enum RealtyAddressErrorCodes {
   CITY_ID_MUST_BE_A_POSITIVE_NUMBER = 'city_id_must_be_a_positive_number',
   CITY_ID_IS_REQUIRED = 'city_id_is_required',
   STATE_ID_IS_REQUIRED = 'state_id_is_required',
+  STATE_ID_MUST_BE_A_POSITIVE_NUMBER = 'state_id_must_be_a_positive_number',
 }

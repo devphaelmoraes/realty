@@ -320,4 +320,19 @@ describe('RealtyAddress', () => {
       ).toThrowError(RealtyAddressErrorCodes.STATE_ID_IS_REQUIRED);
     });
   });
+
+  describe('when stateId is negative number', () => {
+    it('throws exception state_id_must_be_a_positive_number', () => {
+      expect(
+        () =>
+          new RealtyAddress({
+            street: 'a',
+            zipCode: '65066-320',
+            houseNumber: 1,
+            cityId: 1,
+            stateId: -1,
+          }),
+      ).toThrowError(RealtyAddressErrorCodes.STATE_ID_MUST_BE_A_POSITIVE_NUMBER);
+    });
+  });
 });
