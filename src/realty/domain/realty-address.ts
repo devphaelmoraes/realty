@@ -114,6 +114,11 @@ export class RealtyAddress {
   }
 
   private set stateId(value: number) {
+    if (!value) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.STATE_ID_IS_REQUIRED,
+      );
+    }
     this._stateId = value;
   }
 

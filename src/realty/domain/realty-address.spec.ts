@@ -304,4 +304,20 @@ describe('RealtyAddress', () => {
       expect(realtyAddress.stateId).toBe(stateId);
     });
   });
+
+  describe('when set stateId id null', () => {
+    it('throws exception state_id_is_required', () => {
+      expect(
+        () =>
+          new RealtyAddress({
+            street: 'street',
+            zipCode: '65066-320',
+            houseNumber: 1,
+            complement: 'complement',
+            cityId: 1,
+            stateId: null,
+          }),
+      ).toThrowError(RealtyAddressErrorCodes.STATE_ID_IS_REQUIRED);
+    });
+  });
 });
