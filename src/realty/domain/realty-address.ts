@@ -39,6 +39,12 @@ export class RealtyAddress {
         RealtyAddressErrorCodes.ZIP_CODE_IS_REQUIRED,
       );
     }
+    const zipCodeRegex = /^\d{5}-\d{3}$/;
+    if (!zipCodeRegex.test(value)) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.ZIP_CODE_IS_INVALID,
+      );
+    }
     this._zipCode = value;
   }
 

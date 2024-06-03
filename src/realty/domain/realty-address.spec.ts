@@ -59,4 +59,16 @@ describe('RealtyAddress', () => {
       ).toThrowError(RealtyAddressErrorCodes.ZIP_CODE_IS_REQUIRED);
     });
   });
+
+  describe('when zipCode is invalid', () => {
+    it('throws exception zip_code_is_invalid', () => {
+      expect(
+        () =>
+          new RealtyAddress({
+            street: 'a',
+            zipCode: 'A65066320',
+          }),
+      ).toThrowError(RealtyAddressErrorCodes.ZIP_CODE_IS_INVALID);
+    });
+  });
 });
