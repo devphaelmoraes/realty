@@ -5,7 +5,11 @@ describe('RealtyAddress', () => {
   describe('when set street', () => {
     it('should set street', () => {
       const street = 'a'.repeat(250);
-      const realtyAddress = new RealtyAddress({ street, zipCode: '12345-678' });
+      const realtyAddress = new RealtyAddress({
+        street,
+        zipCode: '12345-678',
+        houseNumber: 1,
+      });
       expect(realtyAddress.street).toBe(street);
     });
   });
@@ -17,6 +21,7 @@ describe('RealtyAddress', () => {
           new RealtyAddress({
             street: null,
             zipCode: '12345-678',
+            houseNumber: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.STREET_IS_REQUIRED);
     });
@@ -30,6 +35,7 @@ describe('RealtyAddress', () => {
           new RealtyAddress({
             street: longStreet,
             zipCode: '12345-678',
+            houseNumber: 1,
           }),
       ).toThrowError(
         RealtyAddressErrorCodes.STREET_MUST_BE_LESS_THAN_OR_EQUAL_250,
@@ -43,6 +49,7 @@ describe('RealtyAddress', () => {
       const realtyAddress = new RealtyAddress({
         street: 'street',
         zipCode,
+        houseNumber: 1,
       });
       expect(realtyAddress.zipCode).toBe(zipCode);
     });
@@ -55,6 +62,7 @@ describe('RealtyAddress', () => {
           new RealtyAddress({
             street: 'a',
             zipCode: null,
+            houseNumber: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.ZIP_CODE_IS_REQUIRED);
     });
@@ -67,8 +75,21 @@ describe('RealtyAddress', () => {
           new RealtyAddress({
             street: 'a',
             zipCode: 'A65066320',
+            houseNumber: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.ZIP_CODE_IS_INVALID);
+    });
+  });
+
+  describe('when set houseNumber', () => {
+    it('should set houseNumber', () => {
+      const houseNumber = 10;
+      const realtyAddress = new RealtyAddress({
+        street: 'street',
+        zipCode: '65066-320',
+        houseNumber,
+      });
+      expect(realtyAddress.houseNumber).toBe(houseNumber);
     });
   });
 });

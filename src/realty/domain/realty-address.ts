@@ -4,15 +4,18 @@ import { RealtyAddressException } from './realty-address.exception';
 interface RealtyAddressProps {
   street: string;
   zipCode: string;
+  houseNumber: number;
 }
 
 export class RealtyAddress {
   _street: string;
   _zipCode: string;
+  _houseNumber: number;
 
   constructor(realtyAddressProps: RealtyAddressProps) {
     this.street = realtyAddressProps.street;
     this.zipCode = realtyAddressProps.zipCode;
+    this.houseNumber = realtyAddressProps.houseNumber;
   }
 
   private set street(value: string) {
@@ -50,5 +53,13 @@ export class RealtyAddress {
 
   get zipCode(): string {
     return this._zipCode;
+  }
+
+  private set houseNumber(value: number) {
+    this._houseNumber = value;
+  }
+
+  get houseNumber(): number {
+    return this._houseNumber;
   }
 }
