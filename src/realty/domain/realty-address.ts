@@ -3,12 +3,12 @@ import { RealtyAddressException } from './realty-address.exception';
 
 interface RealtyAddressProps {
   street: string;
-  zipCode: number;
+  zipCode: string;
 }
 
 export class RealtyAddress {
   _street: string;
-  _zipCode: number;
+  _zipCode: string;
 
   constructor(realtyAddressProps: RealtyAddressProps) {
     this.street = realtyAddressProps.street;
@@ -33,11 +33,16 @@ export class RealtyAddress {
     return this._street;
   }
 
-  private set zipCode(value: number) {
+  private set zipCode(value: string) {
+    if (!value) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.ZIP_CODE_IS_REQUIRED,
+      );
+    }
     this._zipCode = value;
   }
 
-  get zipCode(): number {
+  get zipCode(): string {
     return this._zipCode;
   }
 }
