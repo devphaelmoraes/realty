@@ -77,6 +77,11 @@ export class RealtyAddress {
   }
 
   private set complement(value: string) {
+    if (value && value.length > 500) {
+      throw new RealtyAddressException(
+        RealtyAddressErrorCodes.COMPLEMENT_MUST_BE_LESS_THAN_OR_EQUAL_500,
+      );
+    }
     this._complement = value;
   }
 

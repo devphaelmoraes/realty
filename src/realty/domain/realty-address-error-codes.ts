@@ -5,4 +5,5 @@ export enum RealtyAddressErrorCodes {
   ZIP_CODE_IS_INVALID = 'zip_code_is_invalid',
   HOUSE_NUMBER_MUST_BE_A_POSITIVE_NUMBER = 'house_number_must_be_a_positive_number',
   HOUSE_NUMBER_IS_REQUIRED = 'house_number_is_required',
+  COMPLEMENT_MUST_BE_LESS_THAN_OR_EQUAL_500 = 'complement_must_be_less_than_or_equal_500',
 }
