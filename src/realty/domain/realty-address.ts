@@ -7,6 +7,7 @@ interface RealtyAddressProps {
   houseNumber: number;
   complement?: string;
   cityId: number;
+  stateId: number;
 }
 
 export class RealtyAddress {
@@ -15,6 +16,7 @@ export class RealtyAddress {
   _houseNumber: number;
   _complement: string;
   _cityId: number;
+  _stateId: number;
 
   constructor(realtyAddressProps: RealtyAddressProps) {
     this.street = realtyAddressProps.street;
@@ -22,6 +24,7 @@ export class RealtyAddress {
     this.houseNumber = realtyAddressProps.houseNumber;
     this.complement = realtyAddressProps.complement;
     this.cityId = realtyAddressProps.cityId;
+    this.stateId = realtyAddressProps.stateId;
   }
 
   private set street(value: string) {
@@ -108,5 +111,13 @@ export class RealtyAddress {
 
   get cityId(): number {
     return this._cityId;
+  }
+
+  private set stateId(value: number) {
+    this._stateId = value;
+  }
+
+  get stateId(): number {
+    return this._stateId;
   }
 }

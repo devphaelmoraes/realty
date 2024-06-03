@@ -10,6 +10,7 @@ describe('RealtyAddress', () => {
         zipCode: '12345-678',
         houseNumber: 1,
         cityId: 1,
+        stateId: 1,
       });
       expect(realtyAddress.street).toBe(street);
     });
@@ -24,6 +25,7 @@ describe('RealtyAddress', () => {
             zipCode: '12345-678',
             houseNumber: 1,
             cityId: 1,
+            stateId: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.STREET_IS_REQUIRED);
     });
@@ -39,6 +41,7 @@ describe('RealtyAddress', () => {
             zipCode: '12345-678',
             houseNumber: 1,
             cityId: 1,
+            stateId: 1,
           }),
       ).toThrowError(
         RealtyAddressErrorCodes.STREET_MUST_BE_LESS_THAN_OR_EQUAL_250,
@@ -54,6 +57,7 @@ describe('RealtyAddress', () => {
         zipCode,
         houseNumber: 1,
         cityId: 1,
+        stateId: 1,
       });
       expect(realtyAddress.zipCode).toBe(zipCode);
     });
@@ -68,6 +72,7 @@ describe('RealtyAddress', () => {
             zipCode: null,
             houseNumber: 1,
             cityId: 1,
+            stateId: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.ZIP_CODE_IS_REQUIRED);
     });
@@ -82,6 +87,7 @@ describe('RealtyAddress', () => {
             zipCode: 'A65066320',
             houseNumber: 1,
             cityId: 1,
+            stateId: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.ZIP_CODE_IS_INVALID);
     });
@@ -95,6 +101,7 @@ describe('RealtyAddress', () => {
         zipCode: '65066-320',
         houseNumber,
         cityId: 1,
+        stateId: 1,
       });
       expect(realtyAddress.houseNumber).toBe(houseNumber);
     });
@@ -106,6 +113,7 @@ describe('RealtyAddress', () => {
         zipCode: '65066-320',
         houseNumber,
         cityId: 1,
+        stateId: 1,
       });
       expect(realtyAddress.houseNumber).toBe(houseNumber);
     });
@@ -120,6 +128,7 @@ describe('RealtyAddress', () => {
             zipCode: '65066-320',
             houseNumber: null,
             cityId: 1,
+            stateId: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.HOUSE_NUMBER_IS_REQUIRED);
     });
@@ -134,6 +143,7 @@ describe('RealtyAddress', () => {
             zipCode: '65066-320',
             houseNumber: undefined,
             cityId: 1,
+            stateId: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.HOUSE_NUMBER_IS_REQUIRED);
     });
@@ -148,6 +158,7 @@ describe('RealtyAddress', () => {
             zipCode: '65066-320',
             houseNumber: -1,
             cityId: 1,
+            stateId: 1,
           }),
       ).toThrowError(
         RealtyAddressErrorCodes.HOUSE_NUMBER_MUST_BE_A_POSITIVE_NUMBER,
@@ -164,6 +175,7 @@ describe('RealtyAddress', () => {
         houseNumber: 1,
         complement,
         cityId: 1,
+        stateId: 1,
       });
       expect(realtyAddress.complement).toBe(complement);
     });
@@ -178,6 +190,7 @@ describe('RealtyAddress', () => {
         houseNumber: 1,
         complement,
         cityId: 1,
+        stateId: 1,
       });
       expect(realtyAddress.complement).toBe(complement);
     });
@@ -192,6 +205,7 @@ describe('RealtyAddress', () => {
         houseNumber: 1,
         complement,
         cityId: 1,
+        stateId: 1,
       });
       expect(realtyAddress.complement).toBe(complement);
     });
@@ -206,6 +220,7 @@ describe('RealtyAddress', () => {
         houseNumber: 1,
         complement,
         cityId: 1,
+        stateId: 1,
       });
       expect(realtyAddress.complement).toBe(complement);
     });
@@ -222,6 +237,7 @@ describe('RealtyAddress', () => {
             houseNumber: 1,
             complement,
             cityId: 1,
+            stateId: 1,
           }),
       ).toThrowError(
         RealtyAddressErrorCodes.COMPLEMENT_MUST_BE_LESS_THAN_OR_EQUAL_500,
@@ -238,6 +254,7 @@ describe('RealtyAddress', () => {
         houseNumber: 1,
         complement: 'complement',
         cityId,
+        stateId: 1,
       });
       expect(realtyAddress.cityId).toBe(cityId);
     });
@@ -252,6 +269,7 @@ describe('RealtyAddress', () => {
             zipCode: '65066-320',
             houseNumber: 1,
             cityId: null,
+            stateId: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.CITY_ID_IS_REQUIRED);
     });
@@ -266,8 +284,24 @@ describe('RealtyAddress', () => {
             zipCode: '65066-320',
             houseNumber: 1,
             cityId: -1,
+            stateId: 1,
           }),
       ).toThrowError(RealtyAddressErrorCodes.CITY_ID_MUST_BE_A_POSITIVE_NUMBER);
+    });
+  });
+
+  describe('when set stateId ', () => {
+    it('set stateId', () => {
+      const stateId = 10;
+      const realtyAddress = new RealtyAddress({
+        street: 'street',
+        zipCode: '65066-320',
+        houseNumber: 1,
+        complement: 'complement',
+        cityId: 1,
+        stateId,
+      });
+      expect(realtyAddress.stateId).toBe(stateId);
     });
   });
 });
