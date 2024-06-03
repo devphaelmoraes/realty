@@ -5,17 +5,20 @@ interface RealtyAddressProps {
   street: string;
   zipCode: string;
   houseNumber: number;
+  complement?: string;
 }
 
 export class RealtyAddress {
   _street: string;
   _zipCode: string;
   _houseNumber: number;
+  _complement: string;
 
   constructor(realtyAddressProps: RealtyAddressProps) {
     this.street = realtyAddressProps.street;
     this.zipCode = realtyAddressProps.zipCode;
     this.houseNumber = realtyAddressProps.houseNumber;
+    this.complement = realtyAddressProps.complement;
   }
 
   private set street(value: string) {
@@ -71,5 +74,13 @@ export class RealtyAddress {
 
   get houseNumber(): number {
     return this._houseNumber;
+  }
+
+  private set complement(value: string) {
+    this._complement = value;
+  }
+
+  get complement(): string {
+    return this._complement;
   }
 }

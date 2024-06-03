@@ -143,4 +143,17 @@ describe('RealtyAddress', () => {
       );
     });
   });
+
+  describe('when set complement', () => {
+    it('should set complement', () => {
+      const complement = 'my-complement';
+      const realtyAddress = new RealtyAddress({
+        street: 'street',
+        zipCode: '65066-320',
+        houseNumber: 1,
+        complement
+      });
+      expect(realtyAddress.complement).toBe(complement);
+    });
+  });
 });
