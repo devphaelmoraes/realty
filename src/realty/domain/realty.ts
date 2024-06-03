@@ -1,3 +1,4 @@
+import { RealtyAddress } from './realty-address';
 import { RealtyErrorCodes } from './realty-error-codes';
 import { RealtyImage } from './realty-image';
 import { RealtyType } from './realty-type';
@@ -11,6 +12,7 @@ interface RealtyProps {
   price: number;
   type: RealtyType;
   images?: RealtyImage[];
+  address?: RealtyAddress;
 }
 
 export class Realty {
@@ -20,6 +22,7 @@ export class Realty {
   private _price: number;
   private _type: RealtyType;
   private _images: RealtyImage[];
+  private _address: RealtyAddress;
 
   constructor(props: RealtyProps) {
     this.title = props.title;
@@ -27,6 +30,7 @@ export class Realty {
     this.price = props.price;
     this.type = props.type;
     this.images = props.images;
+    this.address = props.address;
   }
 
   private set title(value: string) {
@@ -116,5 +120,13 @@ export class Realty {
       throw new RealtyException(RealtyErrorCodes.IMAGE_NOT_FOUND);
     }
     this.images.splice(imgIdx, 1);
+  }
+
+  private set address(value: RealtyAddress) {
+    this._address = value;
+  }
+
+  get address(): RealtyAddress {
+    return this._address;
   }
 }

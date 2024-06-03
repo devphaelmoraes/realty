@@ -1,4 +1,5 @@
 import { Realty } from './realty';
+import { RealtyAddress } from './realty-address';
 import { RealtyErrorCodes } from './realty-error-codes';
 import { RealtyImage } from './realty-image';
 import { RealtyType } from './realty-type';
@@ -417,6 +418,28 @@ describe('Realty', () => {
         realty.removeImage(imageId);
       }).toThrowError(RealtyErrorCodes.IMAGE_NOT_FOUND);
       expect(realty.images).toHaveLength(images.length);
+    });
+  });
+
+  describe('when set realty address', () => {
+    it('set realty address', () => {
+      const address = new RealtyAddress({
+        street: 'Rua A',
+        zipCode: '65100-100',
+        cityId: 1,
+        stateId: 1,
+        complement: 'my-complement',
+        houseNumber: 0,
+      });
+      const realty = new Realty({
+        title: 'title',
+        description: 'description',
+        price: 150000,
+        type: RealtyType.APARTMENT,
+        address,
+      });
+      expect(realty.address).toBeInstanceOf(RealtyAddress);
+      expect(realty.address).toBe(address);
     });
   });
 });
